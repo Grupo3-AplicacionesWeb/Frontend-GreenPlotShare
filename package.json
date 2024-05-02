@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "json": "cd server && json-server -w db.json -r routes.json"
   },
   "dependencies": {
     "axios": "^1.6.8",
