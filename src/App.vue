@@ -21,5 +21,6 @@ export default {
 };
 </script>
 <template>
+  <pv-toast></pv-toast>
   <router-view />
 </template>
