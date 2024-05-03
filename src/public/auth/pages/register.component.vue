@@ -1,13 +1,189 @@
 <script>
+import { UserApiService } from "../services/users-api.service";
 export default {
   name: "register",
-  title: "Register"
-}
+  title: "Register",
+  data() {
+    return {
+      name: "",
+      lastname: "",
+      email: "",
+      password: "",
+      validationStart: false,
+    };
+  },
+  computed: {
+    isNameValid() {
+      if (this.validationStart) {
+        return this.name.trim() !== "";
+      } else {
+        return true;
+      }
+    },
+    isLastnameValid() {
+      if (this.validationStart) {
+        return this.lastname.trim() !== "";
+      } else {
+        return true;
+      }
+    },
+    isEmailValid() {
+      if (this.validationStart) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(this.email);
+      } else {
+        return true;
+      }
+    },
+    isPasswordValid() {
+      if (this.validationStart) {
+        return this.password.trim() !== "";
+      } else {
+        return true;
+      }
+    },
+  },
+  methods: {
+    async register() {
+      this.validationStart = true;
+      if (
+        !this.isNameValid ||
+        !this.isLastnameValid ||
+        !this.isEmailValid ||
+        !this.isPasswordValid
+      ) {
+        return;
+      }
+      try {
+        const newUser = {
+          name: this.name,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password,
+        };
+        const userApiService = new UserApiService();
+        const response = await userApiService.create(newUser);
+
+        if (response.status == 201) {
+          this.$toast.add({
+            severity: "success",
+            summary: "Account Created",
+            detail: "Your account has been successfully created!",
+            life: 3000,
+          });
+          this.clearFields();
+        } else {
+          throw new Error("Failed to register user");
+        }
+      } catch (error) {
+        console.error("Error registering user:", error);
+        this.$toast.add({
+          severity: "error",
+          summary: "Error",
+          detail: "Failed to register user. Please try again later.",
+          life: 3000,
+        });
+      }
+    },
+    clearFields() {
+      this.name = "";
+      this.lastname = "";
+      this.email = "";
+      this.password = "";
+    },
+  },
+};
 </script>
 
 <template>
-  <div class="w-full align-content-center">
-    <h1>Register</h1>
-    <!-- <p>Welcome to ACME Learning Center.</p> -->
+  <div class="grid justify-content-center gap-4 align-items-center min-h-screen w-full">
+    <div class="md:col-10 lg:col-4 xl:col-3 text-left">
+      <pv-card class="bg-primary">
+        <template #title>
+          <h1 class="text-center text-black-alpha-90">New Account?</h1>
+        </template>
+        <template #content>
+          <form @submit.prevent="register">
+            <div class="mb-5">
+              <pv-float-label>
+                <pv-input-text
+                  id="name"
+                  v-model="name"
+                  :class="{ 'p-invalid': !isNameValid }"
+                />
+                <label for="name" class="text-black-alpha-90">Enter your name</label>
+              </pv-float-label>
+              <small class="text-red-600" v-if="!isNameValid"
+                >Please, enter a valid name.</small
+              >
+            </div>
+            <div class="mb-5">
+              <pv-float-label>
+                <pv-input-text
+                  id="lastname"
+                  v-model="lastname"
+                  :class="{ 'p-invalid': !isLastnameValid }"
+                />
+                <label for="lastname" class="text-black-alpha-90"
+                  >Enter your lastname</label
+                >
+              </pv-float-label>
+              <small class="text-red-600" v-if="!isLastnameValid"
+                >Please, enter a valid lastname.</small
+              >
+            </div>
+            <div class="mb-5">
+              <pv-float-label>
+                <pv-input-text
+                  id="email"
+                  v-model="email"
+                  :class="{ 'p-invalid': !isEmailValid }"
+                />
+                <label for="email" class="text-black-alpha-90">Enter your email</label>
+              </pv-float-label>
+              <small class="text-red-600" v-if="!isEmailValid"
+                >Please, enter a valid email.</small
+              >
+            </div>
+            <div class="mb-5">
+              <pv-float-label>
+                <pv-password
+                  id="password"
+                  v-model="password"
+                  inputId="password"
+                  toggleMask
+                  :class="{ 'p-invalid': !isPasswordValid, 'w-full': true }"
+                />
+                <label for="password" class="text-black-alpha-90"
+                  >Enter your password</label
+                >
+              </pv-float-label>
+              <small class="text-red-600" v-if="!isPasswordValid"
+                >Please, enter a valid password.</small
+              >
+            </div>
+            <div class="text-center">
+              <pv-button
+                type="submit"
+                label="Register now"
+                severity="contrast"
+                rounded
+                class="w-full"
+              />
+              <router-link to="/login">
+                <pv-button
+                  label="Already have an account? Login now"
+                  class="text-black-alpha-90 text-sm"
+                  link
+                />
+              </router-link>
+            </div>
+          </form>
+        </template>
+      </pv-card>
+    </div>
+    <div class="grid lg:col-4 xl:col-3">
+        <img class="w-full border-round-3xl shadow-6" src="../../../../public/img/register-pic.jpg" />
+    </div>
   </div>
 </template>

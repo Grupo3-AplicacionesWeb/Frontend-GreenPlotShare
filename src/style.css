@@ -3,6 +3,7 @@ input{
 }
 body{
     background-color: #f2fcf2;
+    margin:0;
 }
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

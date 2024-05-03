@@ -1,5 +1,4 @@
 <script>
-import { User } from "../model/user.entity.js";
 export default {
   name: "login",
   title: "Login",
@@ -69,8 +68,7 @@ export default {
 </script>
 
 <template>
-  <pv-toast />
-  <div class="grid justify-content-center align-items-center min-h-screen">
+  <div class="grid justify-content-center align-items-center min-h-screen w-full">
     <div class="md:col-10 lg:col-5 xl:col-3 text-left">
       <pv-card class="bg-primary">
         <template #title>
