@@ -7,8 +7,8 @@
 import {createRouter, createWebHistory} from "vue-router";
 import HomeComponent from "../public/pages/home.component.vue";
 import AboutComponent from "../public/pages/about.component.vue";
-import LoginComponent from "../public/auth/pages/login.component.vue";
-import RegisterComponent from "../public/auth/pages/register.component.vue";
+import LoginComponent from "../authentication/pages/login.component.vue";
+import RegisterComponent from "../authentication/pages/register.component.vue";
 
 
 const router = createRouter({
