@@ -1,5 +1,77 @@
 import { createApp } from 'vue'
 import './style.css'
-import App from './App.vue'
+import App from './app.vue'
 
-createApp(App).mount('#app')
+
+// PrimeVue
+
+import PrimeVue from 'primevue/config';
+
+// PrimeVue CSS
+import 'primeflex/primeflex.css';
+
+// PrimeVue Icons
+import 'primeicons/primeicons.css';
+
+// PrimeVue Material Design Theme
+import 'primevue/resources/themes/mdc-light-indigo/theme.css';
+
+
+
+// PrimeVue Services
+import ToastService         from 'primevue/toastservice';
+import ConfirmationService  from "primevue/confirmationservice";
+import DialogService        from "primevue/dialogservice";
+
+// PrimeVue Components
+import DataTable        from "primevue/datatable";
+import Column           from "primevue/column";
+import ConfirmDialog    from "primevue/confirmdialog";
+import Row              from "primevue/row";
+import Toolbar          from "primevue/toolbar";
+import InputText        from "primevue/inputtext";
+import Textarea         from "primevue/textarea";
+import Button           from "primevue/button";
+import Sidebar          from "primevue/sidebar";
+import Menu             from "primevue/menu";
+import Dialog           from "primevue/dialog";
+import Toast            from "primevue/toast";
+import Dropdown         from "primevue/dropdown";
+import Tag              from "primevue/tag";
+import Card             from "primevue/card";
+import FileUpload       from "primevue/fileupload";
+import InputNumber      from "primevue/inputnumber";
+import Checkbox         from "primevue/checkbox";
+import Rating           from "primevue/rating";
+import RadioButton from 'primevue/radiobutton';
+
+
+createApp(App)
+    .use(PrimeVue, { ripple: true })
+    .use(DialogService)
+    .use(ConfirmationService)
+    .use(ToastService)
+    .component('pv-button',         Button)
+    .component('pv-card',           Card)
+    .component('pv-column',         Column)
+    .component('pv-confirm-dialog', ConfirmDialog)
+    .component('pv-checkbox',       Checkbox)
+    .component('pv-data-table',     DataTable)
+    .component('pv-dialog',         Dialog)
+    .component('pv-dropdown',       Dropdown)
+    .component('pv-file-upload',    FileUpload)
+    .component('pv-input-text',     InputText)
+    .component('pv-input-number',   InputNumber)
+    .component('pv-menu',           Menu)
+    .component('pv-rating',         Rating)
+    .component('pv-row',            Row)
+    .component('pv-sidebar',        Sidebar)
+    .component('pv-tag',            Tag)
+    .component('pv-textarea',       Textarea)
+    .component('pv-toolbar',        Toolbar)
+    .component('pv-toast',          Toast)
+    .component('pv-radio-button', RadioButton)
+    .mount('#app')
+
+
+
