@@ -243,8 +243,6 @@ button {
   margin-left: 10px; /* Ajustar el margen entre el icono y el texto */
 }
 
-
-
 .data-container {
   display: flex;
   justify-content: flex-end;
