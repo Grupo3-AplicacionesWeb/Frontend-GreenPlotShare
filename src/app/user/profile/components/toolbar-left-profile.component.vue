@@ -261,7 +261,6 @@ button {
   margin-bottom: 10px; /* Ajustar el espacio entre los elementos */
 }
 
-
 .form-editing {
   display: flex;
 }
