@@ -3,6 +3,8 @@ import './style.css'
 import App from './app.vue'
 
 
+import router from './router/index.js'
+
 // PrimeVue
 
 import PrimeVue from 'primevue/config';
@@ -48,6 +50,7 @@ import RadioButton from 'primevue/radiobutton';
 
 createApp(App)
     .use(PrimeVue, { ripple: true })
+    .use(router)
     .use(DialogService)
     .use(ConfirmationService)
     .use(ToastService)
