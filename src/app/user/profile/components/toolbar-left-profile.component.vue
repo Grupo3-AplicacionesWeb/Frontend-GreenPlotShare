@@ -100,8 +100,9 @@
 
     <!-- Área de foto de perfil -->
     <div class="profile-photo">
-      <img :src="users.profilePhoto" alt="Foto de perfil" />
-      <input type="file" @change="changeProfilePhoto" />
+      <img :src="users.profilePhoto" alt="Foto de perfil" class="profile-image" />
+      <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
+      <button @click="openFilePicker">Edit Photo</button>
     </div>
   </div>
 </template>
@@ -139,7 +140,7 @@ export default {
           console.error('Error al obtener los usuarios:', error);
         });
   },
-  
+
 
   methods: {
     selectOption(option) {
@@ -158,12 +159,21 @@ export default {
           .catch(error => {
             console.error('Error al guardar los cambios:', error);
           });
-    }
-,
-    changeProfilePhoto(event) {
+    },
+
+    openFilePicker() {
+      this.$refs.fileInput.click(); // Al hacer clic en el botón, se activará el clic en el input de tipo file
+    },
+    handleFileChange(event) {
       const file = event.target.files[0];
       // Aquí puedes implementar la lógica para guardar y mostrar la nueva foto de perfil
       console.log('Nueva foto seleccionada:', file.name);
+      // Actualizar la imagen de perfil con la nueva imagen seleccionada
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.users.profilePhoto = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 };
