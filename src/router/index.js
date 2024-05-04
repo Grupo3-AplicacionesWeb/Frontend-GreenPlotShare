@@ -41,14 +41,19 @@ function validateAuthenticationOfPresentUser(){
 
 router.beforeEach((to, from, next) => {
 
+    if (to.path === '/login') {
+        localStorage.clear();
+    }
+
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
     const isAuthenticated = validateAuthenticationOfPresentUser()
-
     if (requiresAuth && !isAuthenticated) {
         next('/login');
     } else {
         next();
     }
+
+
 
     let baseTitle = 'Green Plot Share';
     document.title = `${baseTitle} | ${to.meta['title']}`;
