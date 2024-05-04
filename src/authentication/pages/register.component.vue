@@ -1,5 +1,5 @@
 <script>
-import { UserApiService } from "../services/users-api.service";
+import { UserApiService } from "../services/users-api.service.js";
 export default {
   name: "register",
   title: "Register",
@@ -183,7 +183,7 @@ export default {
       </pv-card>
     </div>
     <div class="grid lg:col-4 xl:col-3">
-        <img class="w-full border-round-3xl shadow-6" src="../../../../public/img/register-pic.jpg" />
+        <img class="w-full border-round-3xl shadow-6" src="../../../public/img/register-pic.jpg" />
     </div>
   </div>
 </template>
