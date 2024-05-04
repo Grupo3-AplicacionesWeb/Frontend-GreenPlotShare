@@ -30,14 +30,6 @@ export default {
 
 <template>
   <div>
-    <!-- Enlaces de Router para el header-->
-    <router-link to="/home">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link to="/agricultural-land">Agricultural Land</router-link>
-
-    <!-- Componentes estáticos -->
-    <home></home>
-    <about></about>
     <agricultural-land></agricultural-land>
 
 

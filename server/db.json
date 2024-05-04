@@ -1,0 +1,132 @@
+{
+  "lands": [
+    {"id": 1,
+      "name": "land1",
+      "ubicacion": "pacasmayo",
+      "antiguedad": "10",
+      "tipo": "tipo1"
+    },
+    {"id": 2,
+      "name": "land2",
+      "ubicacion": "huanuco",
+      "antiguedad": "12",
+      "tipo": "tipo2"
+    },
+    {"id": 3,
+      "name": "land2",
+      "ubicacion": "huanuco",
+      "antiguedad": "13",
+      "tipo": "tipo2"
+    },
+    {"id": 5,
+      "name": "land2",
+      "ubicacion": "huanuco",
+      "antiguedad": "20",
+      "tipo": "tipo2"
+    }
+  ],
+  "cities": [
+      {
+        "name": "Lima",
+        "code": "LIM"
+      },
+      {
+        "name": "Arequipa",
+        "code": "AQP"
+      },
+      {
+        "name": "Cusco",
+        "code": "CUZ"
+      },
+      {
+        "name": "Trujillo",
+        "code": "TRU"
+      },
+      {
+        "name": "Chiclayo",
+        "code": "CIX"
+      },
+      {
+        "name": "Piura",
+        "code": "PIU"
+      },
+      {
+        "name": "Iquitos",
+        "code": "IQT"
+      },
+      {
+        "name": "Huancayo",
+        "code": "HUU"
+      },
+      {
+        "name": "Pucallpa",
+        "code": "PCL"
+      }
+  ],
+  "types": [
+    {
+      "name": "Agrícola",
+      "code": "AGR"
+    },
+    {
+      "name": "Forestal",
+      "code": "FOR"
+    },
+    {
+      "name": "Urbano",
+      "code": "URB"
+    },
+    {
+      "name": "Industrial",
+      "code": "IND"
+    },
+    {
+      "name": "Desértico",
+      "code": "DES"
+    },
+    {
+      "name": "Montañoso",
+      "code": "MON"
+    },
+    {
+      "name": "Costero",
+      "code": "COS"
+    },
+    {
+      "name": "Pantanoso",
+      "code": "PAN"
+    }
+  ],
+  "land_categories": [
+    {
+      "name": "Terrenos Agrícolas",
+      "code": "AGR",
+      "description": "Terrenos dedicados específicamente a la agricultura."
+    },
+    {
+      "name": "Fincas",
+      "code": "FIN",
+      "description": "Propiedades rurales que pueden incluir terrenos agrícolas, ganaderos o mixtos."
+    },
+    {
+      "name": "Huertos",
+      "code": "HUE",
+      "description": "Parcelas de tierra utilizadas para cultivar frutas, vegetales u otras plantas."
+    },
+    {
+      "name": "Tierras de Cultivo Orgánico",
+      "code": "ORG",
+      "description": "Terrenos certificados para el cultivo de alimentos orgánicos."
+    },
+    {
+      "name": "Viveros",
+      "code": "VIV",
+      "description": "Terrenos utilizados para la producción de plantas, árboles y arbustos para su posterior trasplante."
+    },
+    {
+      "name": "Invernaderos",
+      "code": "INV",
+      "description": "Estructuras cubiertas que proporcionan un entorno controlado para el cultivo de plantas."
+    }
+  ]
+}

@@ -1,35 +1,67 @@
 <script>
 import { ref } from "vue";
+import {LandsApiService} from "../services/lands-api.services.js";
+import {CitiesApiServices} from "../services/cities-api.services.js";
+import {typeApiServices} from "../services/type-api-services.js";
+import {CategoriesApiService} from "../services/categories-api.services.js";
+
 export default {
   name: "agricultural-land",
   title: "Agricultural Land",
   data(){
-    const selectedCity=ref();
-    const selectedType=ref();
-    const cities = ref([
-      { name: 'Lima', code: 'LIM' },
-      { name: 'Miraflores', code: 'MIR' },
-      { name: 'San Isidro', code: 'SIS' },
-      { name: 'Barranco', code: 'BAR' },
-      { name: 'Surco', code: 'SUR' }
-    ]);
-    const type = ref([
-      { name: 'type 1', code: 'TP1' },
-      { name: 'type 2', code: 'TP2' },
-      { name: 'type 3', code: 'TP3' },
-      { name: 'type 4', code: 'TP4' },
-      { name: 'type 5', code: 'TP5' }
-    ]);
-    //categorias
-    const category=ref('');
-
 
     return {
-      selectedCity,
-      selectedType,
-      cities,
-      type,
-      category
+      citiesService:null,
+      landService: null,
+      typesService:null,
+      categoriesService:null,
+
+      cities:[],
+      types:[],
+      categories:[],
+
+      selectedCity:null,
+      selectedType:null
+    }
+  },
+  created(){
+  this.landService = new LandsApiService();
+  this.citiesService=new CitiesApiServices();
+  this.typesService = new typeApiServices();
+  this.categoriesService = new CategoriesApiService();
+
+
+  this.getCities();
+  this.getTypes();
+  this.getCategories();
+  },
+  methods: {
+    getCities() {
+      try {
+        this.citiesService.getAll().then(response => {
+          this.cities = response.data;
+        });
+      } catch (error) {
+        console.error("Error al obtener las ciudades:", error);
+      }
+    },
+    getTypes(){
+      try{
+        this.typesService.getAll().then(response => {
+          this.types = response.data;
+        });
+      } catch (error) {
+        console.error("Error al obtener los tipos:", error);
+      }
+    },
+    getCategories(){
+      try{
+        this.categoriesService.getAll().then(response => {
+          this.categories = response.data;
+        });
+      }catch(error){
+        console.error("Error al obtener los categorias:", error);
+      }
     }
   }
 }
@@ -48,7 +80,7 @@ export default {
           <pv-dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" style="background-color:#739A77"/>
         </div>
         <div>
-          <pv-dropdown v-model="selectedType" :options="type" optionLabel="name" placeholder="Select a Type" class="w-full md:w-14rem" style="background-color:#739A77"/>
+          <pv-dropdown v-model="selectedType" :options="types" optionLabel="name" placeholder="Select a Type" class="w-full md:w-14rem" style="background-color:#739A77"/>
         </div>
       </div>
       <div class="category">
