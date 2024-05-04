@@ -96,9 +96,12 @@ export default {
 </script>
 
 <template>
-  <div class="grid justify-content-center gap-4 align-items-center min-h-screen w-full">
-    <div class="md:col-10 lg:col-4 xl:col-3 text-left">
-      <pv-card class="bg-primary">
+  <div class="register-container">
+    <video class="video-fondo" autoplay loop muted>
+      <source src="../../../public/video/fondo-login.mp4" type="video/mp4">
+    </video>
+    <div class="register-form__container">
+      <pv-card class="bg-primary register__login">
         <template #title>
           <h1 class="text-center text-black-alpha-90">New Account?</h1>
         </template>
@@ -182,8 +185,40 @@ export default {
         </template>
       </pv-card>
     </div>
-    <div class="grid lg:col-4 xl:col-3">
-        <img class="w-full border-round-3xl shadow-6" src="../../../public/img/register-pic.jpg" />
-    </div>
   </div>
 </template>
+
+<style>
+
+.register-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F2FCF2;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.register-form__container{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.register__login{
+  width: 100%;
+  z-index: 2;
+}
+
+</style>
