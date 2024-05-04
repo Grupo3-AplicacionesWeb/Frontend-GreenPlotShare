@@ -21,34 +21,34 @@
           <div class="form-column">
             <div>
               <label>First Name: </label>
-              <input v-model="user.firstName" :class="{ 'input-editing': editing }" />
+              <input v-model="users.name" :class="{ 'input-editing': editing }" />
             </div>
             <div>
               <label>Last Name: </label>
-              <input v-model="user.lastName" :class="{ 'input-editing': editing }" />
+              <input v-model="users.lastname" :class="{ 'input-editing': editing }" />
             </div>
             <div>
               <label>Email Address: </label>
-              <input v-model="user.email" :class="{ 'input-editing': editing }" />
+              <input v-model="users.email" :class="{ 'input-editing': editing }" />
             </div>
             <div>
               <label>Phone Number: </label>
-              <input v-model="user.phoneNumber" :class="{ 'input-editing': editing }" />
+              <input v-model="users.phoneNumber" :class="{ 'input-editing': editing }" />
               <button @click="saveChanges">Save</button>
             </div>
           </div>
           <div class="form-column">
             <div>
               <label>Date: </label>
-              <input type="date" v-model="user.birthDate" :class="{ 'input-editing': editing }" />
+              <input type="date" v-model="users.birthDate" :class="{ 'input-editing': editing }" />
             </div>
             <div>
               <label>Address: </label>
-              <input v-model="user.address" :class="{ 'input-editing': editing }" />
+              <input v-model="users.address" :class="{ 'input-editing': editing }" />
             </div>
             <div>
               <label>Apartment:</label>
-              <input v-model="user.apartment" :class="{ 'input-editing': editing }" />
+              <input v-model="users.apartment" :class="{ 'input-editing': editing }" />
             </div>
           </div>
         </div>
@@ -59,19 +59,19 @@
             <div class="data-column">
               <div>
                 <label>First Name: </label>
-                <span class="data-span">{{ user.firstName }}</span>
+                <span class="data-span">{{ users.name }}</span>
               </div>
               <div>
                 <label>Last Name: </label>
-                <span class="data-span">{{ user.lastName }}</span>
+                <span class="data-span">{{ users.lastname }}</span>
               </div>
               <div>
                 <label>Email: </label>
-                <span class="data-span">{{ user.email }}</span>
+                <span class="data-span">{{ users.email }}</span>
               </div>
               <div>
                 <label>Phone Number: </label>
-                <span class="data-span">{{ user.phoneNumber }}</span>
+                <span class="data-span">{{ users.phoneNumber }}</span>
                 <button @click="toggleEditing">Edit</button>
               </div>
 
@@ -79,15 +79,15 @@
             <div class="data-column">
               <div>
                 <label>Date: </label>
-                <span class="data-span">{{ user.birthDate }}</span>
+                <span class="data-span">{{ users.birthDate }}</span>
               </div>
               <div>
                 <label>Address: </label>
-                <span class="data-span">{{ user.address }}</span>
+                <span class="data-span">{{ users.address }}</span>
               </div>
               <div>
                 <label>Apartment: </label>
-                <span class="data-span">{{ user.apartment }}</span>
+                <span class="data-span">{{ users.apartment }}</span>
               </div>
 
             </div>
@@ -100,13 +100,14 @@
 
     <!-- Área de foto de perfil -->
     <div class="profile-photo">
-      <img :src="user.profilePhoto" alt="Foto de perfil" />
+      <img :src="users.profilePhoto" alt="Foto de perfil" />
       <input type="file" @change="changeProfilePhoto" />
     </div>
   </div>
 </template>
 
-<script>
+<<script>
+import axios from 'axios';
 export default {
   name: 'toolbar-left',
   data() {
@@ -120,19 +121,26 @@ export default {
         { id: 6, label: 'Logout', icon: 'fa-sign-out-alt' }
       ],
       selectedOption: null,
-      user: {
-        firstName: 'Jorge',
-        lastName: 'Vins',
-        email: 'jorvins@example.com',
-        phoneNumber: '999999999',
-        birthDate: '01-01-2001',
-        address: 'av bolivia',
-        apartment: '- - -',
-        profilePhoto: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-      },
+      users: {},
       editing: false
     };
   },
+  created() {
+    // Cuando se carga el componente, hacemos una solicitud GET a la API para obtener los usuarios
+    axios.get('http://localhost:3000/users')
+        .then(response => {
+          if (response.data && response.data.length > 0) {
+            this.users = response.data[0]; // Tomamos el primer usuario de la matriz
+          } else {
+            console.error('No se encontraron usuarios en la respuesta.');
+          }
+        })
+        .catch(error => {
+          console.error('Error al obtener los usuarios:', error);
+        });
+  },
+  
+
   methods: {
     selectOption(option) {
       this.selectedOption = option;
@@ -141,10 +149,17 @@ export default {
       this.editing = !this.editing;
     },
     saveChanges() {
-      // Aquí puedes implementar la lógica para guardar los cambios
-      console.log('Cambios guardados:', this.user);
-      this.toggleEditing(); // Alternativamente, podrías desactivar la edición aquí si prefieres
-    },
+      // Realizar una solicitud PUT al servidor con los datos actualizados del usuario
+      axios.put(`http://localhost:3000/users/${this.users.id}`, this.users)
+          .then(response => {
+            console.log('Cambios guardados:', response.data);
+            this.toggleEditing();
+          })
+          .catch(error => {
+            console.error('Error al guardar los cambios:', error);
+          });
+    }
+,
     changeProfilePhoto(event) {
       const file = event.target.files[0];
       // Aquí puedes implementar la lógica para guardar y mostrar la nueva foto de perfil

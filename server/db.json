@@ -2,10 +2,15 @@
   "users": [
     {
       "id": 1,
-      "name": "test",
-      "lastname": "testing",
+      "name": "Juan Luis",
+      "lastname": "Mendoza",
       "email": "testing@example.com",
-      "password": "123"
+      "password": "123",
+      "phoneNumber": "987456123",
+      "birthDate": "01-01-2001",
+      "address": "av bolivia",
+      "apartment": "Nro 472",
+      "profilePhoto": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
     }
   ]
 }
