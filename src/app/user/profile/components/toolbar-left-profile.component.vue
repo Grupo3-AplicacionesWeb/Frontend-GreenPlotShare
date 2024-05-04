@@ -9,105 +9,92 @@
           <span class="option-label">{{ option.label }}</span>
         </li>
       </ul>
-
-
     </div>
+
 
     <!-- Área de detalles del perfil -->
     <div class="profile-details">
       <h2>{{ selectedOption ? selectedOption.label : '' }}</h2>
+
+      <div class="profile-photo">
+        <img :src="users.profilePhoto" alt="Foto de perfil" class="profile-image" />
+        <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
+        <button @click="openFilePicker">Edit Photo</button>
+      </div>
+
       <div class="profile-form">
         <div v-if="editing" class="form-editing">
-          <div class="form-column">
-            <div>
-              <label>First Name: </label>
-              <input v-model="users.name" :class="{ 'input-editing': editing }" />
-            </div>
-            <div>
-              <label>Last Name: </label>
-              <input v-model="users.lastname" :class="{ 'input-editing': editing }" />
-            </div>
-            <div>
-              <label>Email Address: </label>
-              <input v-model="users.email" :class="{ 'input-editing': editing }" />
-            </div>
-            <div>
-              <label>Phone Number: </label>
-              <input v-model="users.phoneNumber" :class="{ 'input-editing': editing }" />
-              <button @click="saveChanges">Save</button>
-            </div>
+          <div>
+            <label>First Name: </label>
+            <input v-model="users.name" :class="{ 'input-editing': editing }" />
           </div>
-          <div class="form-column">
-            <div>
-              <label>Date: </label>
-              <input type="date" v-model="users.birthDate" :class="{ 'input-editing': editing }" />
-            </div>
-            <div>
-              <label>Address: </label>
-              <input v-model="users.address" :class="{ 'input-editing': editing }" />
-            </div>
-            <div>
-              <label>Apartment:</label>
-              <input v-model="users.apartment" :class="{ 'input-editing': editing }" />
-            </div>
+          <div>
+            <label>Last Name: </label>
+            <input v-model="users.lastname" :class="{ 'input-editing': editing }" />
+          </div>
+          <div>
+            <label>Email Address: </label>
+            <input v-model="users.email" :class="{ 'input-editing': editing }" />
+          </div>
+          <div>
+            <label>Phone Number: </label>
+            <input v-model="users.phoneNumber" :class="{ 'input-editing': editing }" />
+            <button @click="saveChanges">Save</button>
+          </div>
+          <div>
+            <label>Date: </label>
+            <input type="date" v-model="users.birthDate" :class="{ 'input-editing': editing }" />
+          </div>
+          <div>
+            <label>Address: </label>
+            <input v-model="users.address" :class="{ 'input-editing': editing }" />
+          </div>
+          <div>
+            <label>Apartment:</label>
+            <input v-model="users.apartment" :class="{ 'input-editing': editing }" />
           </div>
         </div>
-
         <div v-else>
-
-          <div class="data-container">
-            <div class="data-column">
-              <div>
-                <label>First Name: </label>
-                <span class="data-span">{{ users.name }}</span>
-              </div>
-              <div>
-                <label>Last Name: </label>
-                <span class="data-span">{{ users.lastname }}</span>
-              </div>
-              <div>
-                <label>Email: </label>
-                <span class="data-span">{{ users.email }}</span>
-              </div>
-              <div>
-                <label>Phone Number: </label>
-                <span class="data-span">{{ users.phoneNumber }}</span>
-                <button @click="toggleEditing">Edit</button>
-              </div>
-
-            </div>
-            <div class="data-column">
-              <div>
-                <label>Date: </label>
-                <span class="data-span">{{ users.birthDate }}</span>
-              </div>
-              <div>
-                <label>Address: </label>
-                <span class="data-span">{{ users.address }}</span>
-              </div>
-              <div>
-                <label>Apartment: </label>
-                <span class="data-span">{{ users.apartment }}</span>
-              </div>
-
-            </div>
-
+          <div>
+            <label>First Name: </label>
+            <span class="data-span">{{ users.name }}</span>
           </div>
-
+          <div>
+            <label>Last Name: </label>
+            <span class="data-span">{{ users.lastname }}</span>
+          </div>
+          <div>
+            <label>Email: </label>
+            <span class="data-span">{{ users.email }}</span>
+          </div>
+          <div>
+            <label>Phone Number: </label>
+            <span class="data-span">{{ users.phoneNumber }}</span>
+          </div>
+          <div>
+            <label>Date: </label>
+            <span class="data-span">{{ users.birthDate }}</span>
+          </div>
+          <div>
+            <label>Address: </label>
+            <span class="data-span">{{ users.address }}</span>
+          </div>
+          <div>
+            <label>Apartment: </label>
+            <span class="data-span">{{ users.apartment }}</span>
+          </div>
         </div>
+        <button @click="toggleEditing">Edit</button>
       </div>
     </div>
 
+
     <!-- Área de foto de perfil -->
-    <div class="profile-photo">
-      <img :src="users.profilePhoto" alt="Foto de perfil" class="profile-image" />
-      <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
-      <button @click="openFilePicker">Edit Photo</button>
-    </div>
+
   </div>
 </template>
 
-<<script>
+<script>
 import axios from 'axios';
 export default {
   name: 'toolbar-left',
@@ -179,37 +166,51 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .profile-container {
   display: flex;
-
+  height: 100vh;
+  overflow: hidden;
 }
 .input-editing {
   background-color: #6f9573;
 }
 .toolbar-left {
-  width: 100vw; /* 100% del ancho de la ventana */
-  height: 100vh; /* 100% de la altura de la ventana */
+  height: 100vh;
+  width: 200px;
   background-color: #729976;
   font-family: 'Bree Serif', serif;
   font-size: 20px;
-}
 
-.toolbar-left ul {
-  list-style: none; /* Eliminar las marcas de lista */
 
 }
-
-.toolbar-left li {
+.toolbar-left ul{
+  list-style:none;
   display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding:0;
+}
+.toolbar-left li {
+  color: black;
+  width: 100%;
+  height: 60px;
+  cursor: pointer;
+  display:flex;
   align-items: center;
-  color:black;
+  transition: background-color 0.3s ease-in-out;
+  padding-right: 20px;
+  padding-left: 20px;
+
+}
+.toolbar-left li:hover{
+  background-color: #ded9d9;
 }
 
 /* Estilo para el cuadro verde circular */
 .data-span {
   display: inline-block;
-
   padding: 8px;
   border-radius: 7px;
   background-color: #729976;
@@ -219,8 +220,11 @@ export default {
 }
 
 .profile-details {
-  flex: 1;
-  padding: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 
 .profile-details h2 {
@@ -232,19 +236,26 @@ export default {
 }
 
 .profile-form {
-  margin-top: 20px;
   color: #adb0ad;
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color:darkorange;
 }
 
-.profile-form div {
+.profile-form .form-editing div {
+  display: flex;
+  flex-direction:column;
   margin-bottom: 10px;
-  width: auto;
-
+  background-color: darkred;
 }
 
 .profile-photo {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  align-items: center;
 }
 
 .profile-photo img {
@@ -268,29 +279,12 @@ button {
   margin-left: 10px; /* Ajustar el margen entre el icono y el texto */
 }
 
-.data-container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.data-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-left: 20px; /* Ajustar el margen entre las columnas */
-}
-
-.data-column > div {
-  margin-bottom: 10px; /* Ajustar el espacio entre los elementos */
-}
 
 .form-editing {
-  display: flex;
-}
-
-.form-column {
-  flex: 1;
-  margin-right: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+  height: 100%;
 }
 
 </style>
