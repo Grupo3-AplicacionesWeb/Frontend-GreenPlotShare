@@ -21,7 +21,8 @@ export default {
       categories:[],
 
       selectedCity:null,
-      selectedType:null
+      selectedType:null,
+      selectedCategory:[]
     }
   },
   created(){
@@ -83,24 +84,14 @@ export default {
           <pv-dropdown v-model="selectedType" :options="types" optionLabel="name" placeholder="Select a Type" class="w-full md:w-14rem" style="background-color:#739A77"/>
         </div>
       </div>
+
       <div class="category">
-        <p>Category:</p>
+        <p>Categories:</p>
         <div class="flex flex-wrap gap-3">
-          <div class="flex align-items-center">
-            <pv-radio-button v-model="category" inputId="category1" value="Category 1" />
-            <label for="Category1" class="ml-2">Category 1</label>
-          </div>
-          <div class="flex align-items-center">
-            <pv-radio-button v-model="category" inputId="category2" value="Category 2" />
-            <label for="Category2" class="ml-2">Category 2</label>
-          </div>
-          <div class="flex align-items-center">
-            <pv-radio-button v-model="category" inputId="category3" value="Category 3" />
-            <label for="Category3" class="ml-2">Category 3</label>
-          </div>
-          <div class="flex align-items-center">
-            <pv-radio-button v-model="category" inputId="category4" value="Category 4" />
-            <label for="Category4" class="ml-2">Category 4</label>
+          <!-- Iterar sobre el arreglo de categorías -->
+          <div v-for="category in categories" :key="category.code" class="flex align-items-center">
+            <pv-checkbox v-model="selectedCategories" :inputId="category.code" :value="category" />
+            <label :for="category.code" class="ml-2">{{ category.name }}</label>
           </div>
         </div>
       </div>
