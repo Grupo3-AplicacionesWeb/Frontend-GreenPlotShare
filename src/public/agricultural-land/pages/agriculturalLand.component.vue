@@ -1,5 +1,4 @@
 <script>
-import { ref } from "vue";
 import {LandsApiService} from "../services/lands-api.services.js";
 import {CitiesApiServices} from "../services/cities-api.services.js";
 import {typeApiServices} from "../services/type-api-services.js";
@@ -100,74 +99,75 @@ export default {
 </script>
 
 <template>
-    <div class="firstText">
-      <h1>Active Offerings</h1>
-      <p>Explora las ofertas disponibles este mes. Encuentra el terreno perfecto para tus proyectos y haz que tus ideas cobren vida.</p>
-    </div>
+    <div class="container">
+      <div class="firstText">
+        <h1>Active Offerings</h1>
+        <p>Explora las ofertas disponibles este mes. Encuentra el terreno perfecto para tus proyectos y haz que tus ideas cobren vida.</p>
+      </div>
 
-    <!-- opciones -->
-    <div class="options">
-      <div class="dropdown">
-        <div>
-          <pv-dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" style="background-color:#739A77"/>
+      <!-- opciones -->
+      <div class="options">
+        <div class="dropdown">
+          <div>
+            <pv-dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" style="background-color:#739A77"/>
+          </div>
+          <div>
+            <pv-dropdown v-model="selectedType" :options="types" optionLabel="name" placeholder="Select a Type" class="w-full md:w-14rem" style="background-color:#739A77"/>
+          </div>
         </div>
-        <div>
-          <pv-dropdown v-model="selectedType" :options="types" optionLabel="name" placeholder="Select a Type" class="w-full md:w-14rem" style="background-color:#739A77"/>
+
+        <div class="category">
+          <p>Categories:</p>
+          <div class="flex flex-wrap gap-3">
+            <div v-for="category in categories"  class="flex align-items-center">
+              <pv-checkbox v-model="selectedCategories" :inputId="category.code" :value="category" />
+              <label :for="category.code" class="ml-2">{{ category.name }}</label>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="category">
-        <p>Categories:</p>
-        <div class="flex flex-wrap gap-3">
-          <div v-for="category in categories"  class="flex align-items-center">
-            <pv-checkbox v-model="selectedCategories" :inputId="category.code" :value="category" />
-            <label :for="category.code" class="ml-2">{{ category.name }}</label>
-          </div>
+      <!-- Cards -->
+      <div class="Cards">
+        <div v-for="(land, index) in filteredLands" :key="index" class="card">
+          <pv-card style="width: 25rem; overflow: hidden; background-color:#739A77">
+            <template #header>
+              <img class="cardImg" :src="land.image" alt="land header"/>
+            </template>
+
+            <template #title>{{ land.name }}</template>
+            <template #subtitle>{{ land.city }}</template>
+            <template #content>
+              <div class="cardInformation">
+                <div class="textcard">
+                  <p>{{ land.age }} años</p>
+                  <span>Antigüedad</span>
+                </div>
+                <div class="textcard">
+                  <p>{{ land.cost }} $</p>
+                  <span>Costo</span>
+                </div>
+              </div>
+              <div class="cardInformation">
+                <div class="textcard">
+                  <p>{{ land.area }} m<sup>2</sup></p>
+                  <span>Área</span>
+                </div>
+                <div class="textcard">
+                  <p>{{ land.type }}</p>
+                  <span>Tipo</span>
+                </div>
+              </div>
+            </template>
+            <template #footer>
+              <div style="background-color:#739A77" class="cardButton">
+                <pv-button label="See Offering" outlined class="w-full" style="background-color: #121E13; color: #FFFFFF;" rounded />
+              </div>
+            </template>
+          </pv-card>
         </div>
       </div>
     </div>
-
-  <!-- Cards -->
-  <div class="Cards">
-    <div v-for="(land, index) in filteredLands" :key="index" class="card">
-      <pv-card style="width: 25rem; overflow: hidden; background-color:#739A77">
-        <template #header>
-          <!-- Cambio en la fuente de la imagen -->
-          <img class="cardImg" :src="land.image" alt="land header"/>
-        </template>
-
-        <template #title>{{ land.name }}</template>
-        <template #subtitle>{{ land.city }}</template>
-        <template #content>
-          <div class="cardInformation">
-            <div class="textcard">
-              <p>{{ land.age }} años</p>
-              <span>Antigüedad</span>
-            </div>
-            <div class="textcard">
-              <p>{{ land.cost }} $</p>
-              <span>Costo</span>
-            </div>
-          </div>
-          <div class="cardInformation">
-            <div class="textcard">
-              <p>{{ land.area }} m<sup>2</sup></p>
-              <span>Área</span>
-            </div>
-            <div class="textcard">
-              <p>{{ land.type }}</p>
-              <span>Tipo</span>
-            </div>
-          </div>
-        </template>
-        <template #footer>
-          <div class="m-0">
-            <pv-button label="See Offering" outlined class="w-full" style="background-color: #121E13; color: #797979;" rounded />
-          </div>
-        </template>
-      </pv-card>
-    </div>
-  </div>
 
 
 </template>
@@ -176,53 +176,70 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 * {
   font-family: 'Bree Serif', serif;
-}
-
-.firstText h1{
-  display:flex;
-  margin: 0;
-
+  background-color:#f2fcf2;
 
 }
-.firstText p{
-  display:flex;
-  font-size:18px;
+.container{
+  padding:2rem;
 }
+
 .options{
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
 }
+
 .dropdown{
   display:flex;
-  gap:1.5rem;
-}
-.category p{
-  display:flex;
-  margin:0;
-  font-weight:bold;
-}
-
-.cardInformation{
-  display:flex;
-  justify-content: space-around;
-  margin-bottom:2rem
-}
-.cardInformation p{
-  display:flex;
-  margin:0;
-  font-weight:bold;
-}
-.cardInformation span{
-  color: lightgray;
-}
-.card{
-  padding:0;
-  background-color:red;
+  gap:1rem;
+  padding-right: 15px;
+  padding-top:20px
 }
 .Cards{
-  display: flex;
-  margin-top:2rem;
-  gap: 1.5rem;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap:wrap;
+
+}
+.Cards .card{
+  margin-top:1.5rem;
+  margin-bottom:1.5rem;
+}
+.cardInformation{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding:1.5rem 0;
+  background-color:#f2fcf2;
+}
+.cardInformation span{
+  color:#9A9A9A;
+}
+.cardButton:hover {
+  background-color: #1a2e21;
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  transform: translateY(-3px);
+
 }
 
+.cardButton:hover:after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  animation: hoverAnimation 0.3s forwards;
+}
+
+@keyframes hoverAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 </style>
