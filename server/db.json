@@ -1,28 +1,64 @@
 {
   "lands": [
-    {"id": 1,
-      "name": "land1",
-      "ubicacion": "pacasmayo",
-      "antiguedad": "10",
-      "tipo": "tipo1"
+    {
+      "name": "Finca Los Girasoles",
+      "city": "Lima",
+      "age": 15,
+      "cost": 200000,
+      "area": 1200,
+      "type": "Agrícola",
+      "category": "Terrenos Agrícolas",
+      "image": "https://riocruces.cl/wp-content/uploads/2021/03/13-6-1170x785.jpg"
     },
-    {"id": 2,
-      "name": "land2",
-      "ubicacion": "huanuco",
-      "antiguedad": "12",
-      "tipo": "tipo2"
+    {
+      "name": "Bosque Azul",
+      "city": "Arequipa",
+      "age": 8,
+      "cost": 180000,
+      "area": 900,
+      "type": "Forestal",
+      "category": "Fincas",
+      "image": "https://riocruces.cl/wp-content/uploads/2021/03/13-6-1170x785.jpg"
     },
-    {"id": 3,
-      "name": "land2",
-      "ubicacion": "huanuco",
-      "antiguedad": "13",
-      "tipo": "tipo2"
+    {
+      "name": "Urbanización San Martín",
+      "city": "Trujillo",
+      "age": 3,
+      "cost": 250000,
+      "area": 1500,
+      "type": "Urbano",
+      "category": "Terrenos Urbanos",
+      "image": "https://riocruces.cl/wp-content/uploads/2021/03/13-6-1170x785.jpg"
     },
-    {"id": 5,
-      "name": "land2",
-      "ubicacion": "huanuco",
-      "antiguedad": "20",
-      "tipo": "tipo2"
+    {
+      "name": "Granja El Paraíso",
+      "city": "Cusco",
+      "age": 12,
+      "cost": 220000,
+      "area": 1100,
+      "type": "Agrícola",
+      "category": "Huertos",
+      "image": "https://parquesalegres.org/wp-content/uploads/2017/10/18575462-Ancianos-amante-de-un-huerto-recibido-cosecha-de-tomates-Foto-de-archivo.jpg"
+    },
+    {
+      "name": "Campo Dorado",
+      "city": "Piura",
+      "age": 6,
+      "cost": 160000,
+      "area": 800,
+      "type": "Agrícola",
+      "category": "Tierras de Cultivo Orgánico",
+      "image": "https://1.bp.blogspot.com/-Y2TBmGkP1Qk/VgBv9G8EiuI/AAAAAAAAA-A/EuaExDn7iXUK3tQrvTWbLsXgtHalgbf8ACPcBGAYYCw/s1600/302.jpg"
+    },
+    {
+      "name": "Vivero La Flor",
+      "city": "Iquitos",
+      "age": 4,
+      "cost": 140000,
+      "area": 700,
+      "type": "Agrícola",
+      "category": "Viveros",
+      "image": "https://1.bp.blogspot.com/-Y2TBmGkP1Qk/VgBv9G8EiuI/AAAAAAAAA-A/EuaExDn7iXUK3tQrvTWbLsXgtHalgbf8ACPcBGAYYCw/s1600/302.jpg"
     }
   ],
   "cities": [
